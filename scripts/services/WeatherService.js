@@ -17,7 +17,7 @@ angular.module('WeatherApp')
         params: {
           lat: params.latitude,
           lon: params.longitude,
-          zip: params.zip && params.country ? params.zip.toLowerCase() + ',' + params.country.toLowerCase()  : '',
+          zip: params.zip && params.country ? params.zip.toLowerCase().replace(/\s/g, "") + ',' + params.country.toLowerCase().replace(/\s/g, "")  : '',
           units: 'metric',
           APPID: APPID
         }
