@@ -18,6 +18,14 @@ angular.module('WeatherApp')
 
       self.weatherData = response;
 
+      // Send a notification about success
+      CalloutService.notify({
+        type: 'success',
+        message: 'Weather data successfully fetched',
+        img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-check.svg',
+        timeout: 2000
+      });
+
     });
 
   // ---------------------------------------> ERROR
@@ -63,7 +71,8 @@ angular.module('WeatherApp')
         CalloutService.notify({
           type: 'success',
           message: 'Weather data successfully fetched',
-          img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-check.svg'
+          img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-check.svg',
+          timeout: 2000
         });
 
         // Set data

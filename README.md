@@ -21,3 +21,7 @@ foundation watch
 This will compile all js and scss.
 
 ## You're good to go!
+
+
+## Side notes
+As this app is very simple, I didn't use any inheritance (it simply doesn't have that much objects to make use of inheritance)
