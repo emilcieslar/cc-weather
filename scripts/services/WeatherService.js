@@ -2,9 +2,8 @@ angular.module('WeatherApp')
 
 .factory('WeatherService', ['$http', '$q', function($http, $q) {
 
-  // -------------------------------------> Define private variables and constants
-  var weather,
-      APPID = 'a5406db6084c9bf40b2b1196b196e199';
+  // -------------------------------------> Define private constant
+  var APPID = 'a5406db6084c9bf40b2b1196b196e199';
 
   // -------------------------------------> Return the service
   return {

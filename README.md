@@ -11,6 +11,13 @@ npm install
 
 This will install all dependencies.
 
+
+If you want to run a test, you should have karma installed
+
+```bash
+sudo npm install -g karma-cli
+```
+
 ## Compiling the project
 
 In the project folder in CLI, run the following command:
