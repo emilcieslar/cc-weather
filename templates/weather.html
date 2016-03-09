@@ -1,0 +1,55 @@
+<!-- ##################################### City name -->
+<h2 class="text-center">{{weatherData.name}}</h2>
+
+<!-- ##################################### A list of weather icons -->
+<div class="row">
+  <div class="large-12 columns text-center">
+
+    <!-- Weather icons if there are more than one because weather api returns an array -->
+    <div class="weather-icons" ng-repeat="item in weatherData.weather track by $index">
+
+      <i class="wi" ng-class="'wi-owm-'+item.id"></i>
+      <span >{{item.main}}</span>
+
+    </div><!-- weather icons -->
+
+  </div><!-- large-12 columns -->
+</div><!-- row -->
+
+<!-- ##################################### Common information about weather -->
+<div class="row">
+  <div class="large-12 columns">
+
+    <table>
+      <tbody>
+
+        <tr>
+          <th>Wind</th>
+          <td>{{weatherData.wind.speed}} m/s</td>
+        </tr>
+
+        <tr>
+          <th>Cloudiness</th>
+          <td>{{weatherData.clouds.all}} %</td>
+        </tr>
+
+        <tr>
+          <th>Pressure</th>
+          <td>{{weatherData.main.pressure}} hpa</td>
+        </tr>
+
+        <tr>
+          <th>Humidity</th>
+          <td>{{weatherData.main.humidity}} %</td>
+        </tr>
+
+        <tr>
+          <th>Temperature</th>
+          <td>{{weatherData.main.temp}} &#8451;</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div><!-- large-12 columns -->
+</div><!-- row -->

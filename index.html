@@ -1,0 +1,71 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body ng-app="WeatherApp">
+
+    <!-- ########################################################################### MAIN CONTROLLER -->
+    <div class="row" ng-controller="MainController as MainCtrl">
+      <div class="large-4 large-offset-4 medium-6 medium-offset-3 columns">
+
+        <h1 class="text-center">Weather App</h1>
+
+        <!-- ##################################### Reusable notification service for displaying messages -->
+        <!-- ##################################### This is an example of Observer pattern -->
+        <!-- ##################################### Get more info on https://github.com/emilcieslar/angular-ec-callout -->
+        <ec-callout></ec-callout>
+
+        <!-- ##################################### WEATHER WIDGET -->
+        <weather-widget weather-data="MainCtrl.weatherData" ng-cloak ng-show="MainCtrl.weatherData"></weather-widget>
+
+        <!-- ########################################################################### FORM FOR INSERTING COUNTRY AND ZIPCODE -->
+        <form name="weatherForm" novalidate ng-show="MainCtrl.geoError" ng-cloak>
+          <div class="row">
+
+            <!-- I'm not checking for validity of these since I believe that would be out of scope of this assignment -->
+            <!-- I have tried https://github.com/rsertelon/iso-3166-country-codes-angular, however weather api doesn't support standard codes such as GB for uk -->
+
+            <!-- ##################################### ZIP CODE -->
+            <div class="large-6 columns">
+              <label>Zip code
+                <input type="text" name="zipcode" ng-model="MainCtrl.zipcode" placeholder="Zip code" required>
+              </label>
+              <span ng-cloak ng-show="weatherForm.zipcode.$error.required" class="form-error is-visible">This field is required</span>
+            </div><!-- large-6 columns -->
+
+            <!-- ##################################### COUNTRY CODE -->
+            <div class="large-6 columns">
+              <label>Country code
+                <input type="text" name="country" ng-model="MainCtrl.country" placeholder="Country code" required>
+              </label>
+              <span ng-cloak ng-show="weatherForm.country.$error.required" class="form-error is-visible">This field is required</span>
+            </div><!-- large-6 columns -->
+
+            <!-- ##################################### SUBMIT -->
+            <div class="large-12 columns">
+              <button type="submit" ng-click="MainCtrl.getWeatherManually()" name="cityFormSubmit" class="button success expanded text-center">Show me weather</button>
+            </div><!-- large-12 columns -->
+
+          </div><!-- row -->
+        </form>
+
+      </div><!-- large-4 large-offset-4 medium-6 medium-offset-3 columns -->
+    </div><!-- row MainController -->
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/what-input/what-input.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <script src="js/app.js"></script>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/ngGeolocation/ngGeolocation.min.js"></script>
+    <script src="bower_components/angular-ec-callout/dist/angular-ec-callout.js"></script>
+    <script src="js/WeatherApp.js"></script>
+  </body>
+</html>
