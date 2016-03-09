@@ -1,0 +1,56 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body ng-app="WeatherApp">
+
+    <div class="row" ng-controller="MainController as MainCtrl">
+      <div class="large-4 large-offset-4 medium-6 medium-offset-3 columns">
+
+        <h1 class="text-center">Weather App</h1>
+
+        <i class="wi" ng-class="MainCtrl.icon"></i>
+
+        <form name="weatherForm" ng-submit="MainCtrl.getCity()" novalidate>
+          <div class="row">
+
+            <div class="large-6 columns">
+              <label>Zip code
+                <input type="text" name="zipcode" ng-model="MainCtrl.zipcode" placeholder="Zip code">
+              </label>
+            </div><!-- large-6 columns -->
+
+            <div class="large-6 columns">
+              <label>Country code
+                <input type="text" name="country" ng-model="MainCtrl.country" placeholder="Country code" country-code ng-class="{'is-invalid-input': weatherForm.country.$error.countrycode}" ng-model-options="{ updateOn: 'mousedown blur' }">
+              </label>
+              <span ng-show="weatherForm.country.$error.countrycode" class="form-error is-visible" id="countrycode">This must be a valid country code!</span>
+            </div><!-- large-6 columns -->
+
+            <div class="large-12 columns">
+              <button type="submit" name="cityFormSubmit" class="button success expanded text-center">Show me weather</button>
+            </div><!-- large-12 columns -->
+
+          </div><!-- row -->
+        </form>
+
+      </div><!-- large-4 large-offset-4 medium-6 medium-offset-3 columns -->
+    </div><!-- row -->
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/what-input/what-input.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <script src="js/app.js"></script>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/ngGeolocation/ngGeolocation.min.js"></script>
+    <script src="bower_components/iso-3166-country-codes-angular/dist/iso-3166-country-codes-angular.min.js"></script>
+    <script src="js/WeatherApp.js"></script>
+  </body>
+</html>
