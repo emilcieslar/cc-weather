@@ -1,6 +1,6 @@
 # CC Weather
 
-(Example)[http://emilcieslar.github.io/cc-weather/]
+[Example](http://emilcieslar.github.io/cc-weather/)
 
 ***Please be aware that free plan in the API can block any call therefore the app may say that there is no weather data for provided location, however it's an API limit***
 
