@@ -16,15 +16,16 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular.mocks.js',
-      'js/**/*.js',
+      'tests/angular.mocks.js',
+      'bower_components/angular-ec-callout/dist/angular-ec-callout.js',
+      'bower_components/ngGeolocation/ngGeolocation.min.js',
+      'js/WeatherApp.js',
       'tests/**/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-      'js/app.js'
     ],
 
 
