@@ -13,7 +13,7 @@
     "motion-ui": "~1.2.2",
     "angular": "^1.5.0",
     "ngGeolocation": "^0.0.8",
-    "angular-ec-callout": "emilcieslar/angular-ec-callout",
+    "angular-ec-callout": "emilcieslar/angular-ec-callout"
   },
   "ignore": [
     "**/.*",
