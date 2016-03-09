@@ -1,1 +1,1 @@
-angular.module('WeatherApp', ['ngGeolocation', 'iso-3166-country-codes']);
+angular.module('WeatherApp', ['ngGeolocation', 'angular-ec-callout']);

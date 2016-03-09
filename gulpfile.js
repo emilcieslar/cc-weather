@@ -9,6 +9,7 @@ var sassPaths = [
 var jsPaths = [
   'scripts/app.js',
   'scripts/services/*.js',
+  'scripts/directives/*.js',
   'scripts/controllers/*.js'
 ];
 

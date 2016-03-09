@@ -9,38 +9,53 @@
   </head>
   <body ng-app="WeatherApp">
 
+    <!-- ########################################################################### MAIN CONTROLLER -->
     <div class="row" ng-controller="MainController as MainCtrl">
       <div class="large-4 large-offset-4 medium-6 medium-offset-3 columns">
 
         <h1 class="text-center">Weather App</h1>
 
-        <i class="wi" ng-class="MainCtrl.icon"></i>
+        <!-- ##################################### Reusable notification service for displaying messages -->
+        <!-- ##################################### This is an example of Observer pattern -->
+        <!-- ##################################### Get more info on https://github.com/emilcieslar/angular-ec-callout -->
+        <ec-callout></ec-callout>
 
-        <form name="weatherForm" ng-submit="MainCtrl.getCity()" novalidate>
+        <!-- ##################################### WEATHER WIDGET -->
+        <weather-widget weather-data="MainCtrl.weatherData" ng-cloak ng-show="MainCtrl.weatherData"></weather-widget>
+
+        <!-- ########################################################################### FORM FOR INSERTING COUNTRY AND ZIPCODE -->
+        <form name="weatherForm" novalidate ng-show="MainCtrl.geoError" ng-cloak>
           <div class="row">
 
+            <!-- I'm not checking for validity of these since I believe that would be out of scope of this assignment -->
+            <!-- I have tried https://github.com/rsertelon/iso-3166-country-codes-angular, however weather api doesn't support standard codes such as GB for uk -->
+
+            <!-- ##################################### ZIP CODE -->
             <div class="large-6 columns">
               <label>Zip code
-                <input type="text" name="zipcode" ng-model="MainCtrl.zipcode" placeholder="Zip code">
+                <input type="text" name="zipcode" ng-model="MainCtrl.zipcode" placeholder="Zip code" required>
               </label>
+              <span ng-cloak ng-show="weatherForm.zipcode.$error.required" class="form-error is-visible">This field is required</span>
             </div><!-- large-6 columns -->
 
+            <!-- ##################################### COUNTRY CODE -->
             <div class="large-6 columns">
               <label>Country code
-                <input type="text" name="country" ng-model="MainCtrl.country" placeholder="Country code" country-code ng-class="{'is-invalid-input': weatherForm.country.$error.countrycode}" ng-model-options="{ updateOn: 'mousedown blur' }">
+                <input type="text" name="country" ng-model="MainCtrl.country" placeholder="Country code" required>
               </label>
-              <span ng-show="weatherForm.country.$error.countrycode" class="form-error is-visible" id="countrycode">This must be a valid country code!</span>
+              <span ng-cloak ng-show="weatherForm.country.$error.required" class="form-error is-visible">This field is required</span>
             </div><!-- large-6 columns -->
 
+            <!-- ##################################### SUBMIT -->
             <div class="large-12 columns">
-              <button type="submit" name="cityFormSubmit" class="button success expanded text-center">Show me weather</button>
+              <button type="submit" ng-click="MainCtrl.getWeatherManually()" name="cityFormSubmit" class="button success expanded text-center">Show me weather</button>
             </div><!-- large-12 columns -->
 
           </div><!-- row -->
         </form>
 
       </div><!-- large-4 large-offset-4 medium-6 medium-offset-3 columns -->
-    </div><!-- row -->
+    </div><!-- row MainController -->
 
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -50,7 +65,7 @@
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/ngGeolocation/ngGeolocation.min.js"></script>
-    <script src="bower_components/iso-3166-country-codes-angular/dist/iso-3166-country-codes-angular.min.js"></script>
+    <script src="bower_components/angular-ec-callout/dist/angular-ec-callout.js"></script>
     <script src="js/WeatherApp.js"></script>
   </body>
 </html>

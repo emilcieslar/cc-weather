@@ -9,14 +9,16 @@ angular.module('WeatherApp')
   // -------------------------------------> Return the service
   return {
 
-    getWeather: function(coords) {
+    getWeather: function(params) {
 
       var deferred = $q.defer();
 
       $http.get('//api.openweathermap.org/data/2.5/weather', {
         params: {
-          lat: coords.latitude,
-          lon: coords.longitude,
+          lat: params.latitude,
+          lon: params.longitude,
+          zip: params.zip && params.country ? params.zip.toLowerCase() + ',' + params.country.toLowerCase()  : '',
+          units: 'metric',
           APPID: APPID
         }
       }).then(function(response) {
