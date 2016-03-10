@@ -29,6 +29,9 @@ In the project folder in CLI, run the following command:
 foundation watch
 ```
 
+If you don't have `foundation-cli` installed, you can just run `gulp` while in the project folder in CLI.
+
+
 This will compile all js and scss.
 
 ## You're good to go!
