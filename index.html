@@ -24,7 +24,7 @@
         <weather-widget weather-data="MainCtrl.weatherData" ng-cloak ng-show="MainCtrl.weatherData"></weather-widget>
 
         <!-- ########################################################################### FORM FOR INSERTING COUNTRY AND ZIPCODE -->
-        <form name="weatherForm" novalidate ng-show="MainCtrl.geoError" ng-cloak>
+        <form name="weatherForm" ng-submit="MainCtrl.getWeatherManually()" ng-show="MainCtrl.geoError" ng-cloak>
           <div class="row">
 
             <!-- I'm not checking for validity of these since I believe that would be out of scope of this assignment -->
@@ -48,7 +48,7 @@
 
             <!-- ##################################### SUBMIT -->
             <div class="large-12 columns">
-              <button type="submit" ng-click="MainCtrl.getWeatherManually()" name="cityFormSubmit" class="button success expanded text-center">Show me weather</button>
+              <button type="submit" ng-disabled="weatherForm.$invalid" name="cityFormSubmit" class="button success expanded text-center">Show me weather</button>
             </div><!-- large-12 columns -->
 
           </div><!-- row -->
