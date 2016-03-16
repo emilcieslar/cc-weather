@@ -1,11 +1,12 @@
 angular.module('WeatherApp')
 
-.factory('WeatherService', ['$http', '$q', function($http, $q) {
+.factory('WeatherService', ['$http', '$q', 'ecCalloutService', function($http, $q, CalloutService) {
 
+  // ----------------------------------------------------------------------------> DEFINE VARIABLES
   // -------------------------------------> Define API key
   var APPID = 'a5406db6084c9bf40b2b1196b196e199';
 
-  // -------------------------------------> Return the service
+  // ----------------------------------------------------------------------------> RETURN THE SERVICE
   return {
 
     // -------------------------------------> A method to return weather data
@@ -29,8 +30,36 @@ angular.module('WeatherApp')
 
       }).then(function(response) {
 
-        // If the request was successful resolve the response data
-        deferred.resolve(response.data);
+        console.log(response);
+
+        // Check for response.data.cod property
+        // If it's not 200, the response is not successful
+        // This happens when API's response status is 200 (which is basically
+        // success and therefore handled here), yet the API responded
+        // with data containing cod: "404", which is an error
+        if(response.data.cod != 200) {
+
+          CalloutService.notify({
+            type: 'alert',
+            message: response.data.message,
+            img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-alert.svg'
+          });
+
+        // Otherwise, if it's cod: "200", we have successful response and can handle the data
+        } else {
+
+          // Send a notification about success
+          CalloutService.notify({
+            type: 'success',
+            message: 'Weather data successfully fetched',
+            img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-check.svg',
+            timeout: 2000
+          });
+
+          // Resolve the response data
+          deferred.resolve(response.data);
+
+        }
 
       // If there was an error during the process, log it
       }, function(error) {

@@ -16,29 +16,26 @@ angular.module('WeatherApp')
     // ---------------------------------------> If successful, get weather for that location and display data
     WeatherService.getWeather(position.coords).then(function(response) {
 
+      // Set data
       self.weatherData = response;
-
-      // Send a notification about success
-      CalloutService.notify({
-        type: 'success',
-        message: 'Weather data successfully fetched',
-        img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-check.svg',
-        timeout: 2000
-      });
 
     });
 
   // ---------------------------------------> ERROR
   }, function(error) {
+
     // If there's an error, log it and display a form to manually enter
     // zip code and country code
     console.error(error);
+
     // Show form
     self.geoError = true;
-    // Display notification
+
+    // Display notification that location service is not allowed
     CalloutService.notify({
       message: 'Location service was not allowed, please provide details to display weather',
     });
+
   });
 
   // ----------------------------------------------------------------------------> Get weather manually
@@ -51,36 +48,13 @@ angular.module('WeatherApp')
       'zip': self.zipcode,
       'country': self.country
 
+    // On successful response
     }).then(function(response) {
 
-      console.log(response);
-
-      // If the country code & zip code combination didn't return any results
-      if(response.cod != 200) {
-
-        CalloutService.notify({
-          type: 'alert',
-          message: 'No weather data for provided location',
-          img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-alert.svg'
-        });
-
-      // Otherwise set the data and hide form
-      } else {
-
-        // Send a notification about success
-        CalloutService.notify({
-          type: 'success',
-          message: 'Weather data successfully fetched',
-          img: 'https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-check.svg',
-          timeout: 2000
-        });
-
-        // Set data
-        self.weatherData = response;
-        // Hide form
-        self.geoError = false;
-
-      }
+      // Set data
+      self.weatherData = response;
+      // Hide form
+      self.geoError = false;
 
     });
 
